@@ -1,52 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Tile from './Tile';
 import { getInitialGrid } from '../util/tile';
+import useHandleKeyboard from '../util/useHandleKeyboard';
 
 const GRID_SIZE = 4;
 
 function Grid() {
 	const [tileList, setTileList] = useState(getInitialGrid);
-
-	useEffect(() => {
-		window.addEventListener('keydown', handleInput);
-
-		return () => {
-			window.removeEventListener('keydown', handleInput);
-		};
-	});
-
-	function handleInput(e) {
-		switch (e.key) {
-			case 'ArrowUp':
-				moveUp();
-				break;
-			case 'ArrowDown':
-				moveDown();
-				break;
-			case 'ArrowLeft':
-				moveLeft();
-				break;
-			case 'ArrowRight':
-				moveRight();
-				break;
-			default:
-				break;
-		}
-	}
-
-	function moveUp() {
-		console.log('up');
-	}
-	function moveDown() {
-		console.log('down');
-	}
-	function moveLeft() {
-		console.log('left');
-	}
-	function moveRight() {
-		console.log('right');
-	}
+	useHandleKeyboard({ tileList, setTileList });
 
 	return (
 		<Board>
